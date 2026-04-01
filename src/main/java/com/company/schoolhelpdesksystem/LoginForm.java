@@ -42,15 +42,15 @@ public class LoginForm extends JFrame {
         lblLoginTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         leftPanel.add(lblLoginTitle);
-        leftPanel.add(Box.createVerticalStrut(30));
+        leftPanel.add(Box.createVerticalStrut(50));
 
         txtUsername = createField("Username");
         txtPassword = createPasswordField("Password");
 
         leftPanel.add(txtUsername);
-        leftPanel.add(Box.createVerticalStrut(20));
+        leftPanel.add(Box.createVerticalStrut(25));
         leftPanel.add(txtPassword);
-        leftPanel.add(Box.createVerticalStrut(15));
+        leftPanel.add(Box.createVerticalStrut(35));
 
         JLabel lblForgot = new JLabel("Forgot Password?");
         lblForgot.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -95,30 +95,53 @@ public class LoginForm extends JFrame {
         rightPanel.setPreferredSize(new Dimension(500, 600));
 
         // Add spacing
-        rightPanel.add(Box.createVerticalStrut(80));
+        rightPanel.add(Box.createVerticalStrut(40));
 
-        // Placeholder for illustration - shows purple panel with better formatting
-        JLabel illustration = new JLabel("📚");
-        illustration.setFont(new Font("Arial", Font.PLAIN, 80));
-        illustration.setHorizontalAlignment(SwingConstants.CENTER);
-        illustration.setAlignmentX(Component.CENTER_ALIGNMENT);
-        rightPanel.add(illustration);
+        // School books icon
+        JLabel books1 = new JLabel("📖");
+        books1.setFont(new Font("Arial", Font.PLAIN, 50));
+        books1.setHorizontalAlignment(SwingConstants.CENTER);
+        books1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rightPanel.add(books1);
 
+        // Main heading
         JLabel helpdeskText = new JLabel("School Helpdesk");
-        helpdeskText.setFont(new Font("Segoe UI", Font.BOLD, 42));
+        helpdeskText.setFont(new Font("Segoe UI", Font.BOLD, 48));
         helpdeskText.setForeground(Color.WHITE);
         helpdeskText.setHorizontalAlignment(SwingConstants.CENTER);
         helpdeskText.setAlignmentX(Component.CENTER_ALIGNMENT);
         rightPanel.add(Box.createVerticalStrut(20));
         rightPanel.add(helpdeskText);
 
+        // Tagline
         JLabel tagline = new JLabel("Manage Issues Efficiently");
         tagline.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         tagline.setForeground(new Color(200, 200, 255));
         tagline.setHorizontalAlignment(SwingConstants.CENTER);
         tagline.setAlignmentX(Component.CENTER_ALIGNMENT);
-        rightPanel.add(Box.createVerticalStrut(15));
+        rightPanel.add(Box.createVerticalStrut(30));
         rightPanel.add(tagline);
+
+        // School icons row
+        rightPanel.add(Box.createVerticalStrut(40));
+
+        JPanel iconsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
+        iconsPanel.setBackground(new Color(89, 33, 242));
+        iconsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel studentIcon = new JLabel("👨‍🎓");
+        studentIcon.setFont(new Font("Arial", Font.PLAIN, 45));
+        iconsPanel.add(studentIcon);
+
+        JLabel booksIcon = new JLabel("📚");
+        booksIcon.setFont(new Font("Arial", Font.PLAIN, 45));
+        iconsPanel.add(booksIcon);
+
+        JLabel helpIcon = new JLabel("🎓");
+        helpIcon.setFont(new Font("Arial", Font.PLAIN, 45));
+        iconsPanel.add(helpIcon);
+
+        rightPanel.add(iconsPanel);
 
         root.add(leftPanel, BorderLayout.WEST);
         root.add(rightPanel, BorderLayout.EAST);
@@ -128,13 +151,13 @@ public class LoginForm extends JFrame {
 
     private JTextField createField(String placeholder) {
         JTextField field = new JTextField();
-        field.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        field.setBackground(new Color(248, 249, 250));
-        field.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        field.setBackground(new Color(245, 245, 245));
+        field.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1));
         field.setText(placeholder);
-        field.setForeground(new Color(140, 140, 140));
-        field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
-        field.setAlignmentX(Component.LEFT_ALIGNMENT);
+        field.setForeground(new Color(150, 150, 150));
+        field.setPreferredSize(new Dimension(350, 50));
+        field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
 
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -146,7 +169,7 @@ public class LoginForm extends JFrame {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getText().isEmpty()) {
                     field.setText(placeholder);
-                    field.setForeground(new Color(140, 140, 140));
+                    field.setForeground(new Color(150, 150, 150));
                 }
             }
         });
@@ -156,14 +179,14 @@ public class LoginForm extends JFrame {
 
     private JPasswordField createPasswordField(String placeholder) {
         JPasswordField field = new JPasswordField();
-        field.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        field.setBackground(new Color(248, 249, 250));
-        field.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        field.setBackground(new Color(245, 245, 245));
+        field.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1));
         field.setEchoChar((char)0);
         field.setText(placeholder);
-        field.setForeground(new Color(140, 140, 140));
-        field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
-        field.setAlignmentX(Component.LEFT_ALIGNMENT);
+        field.setForeground(new Color(150, 150, 150));
+        field.setPreferredSize(new Dimension(350, 50));
+        field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
 
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -177,7 +200,7 @@ public class LoginForm extends JFrame {
                 if (new String(field.getPassword()).isEmpty()) {
                     field.setEchoChar((char)0);
                     field.setText(placeholder);
-                    field.setForeground(new Color(140, 140, 140));
+                    field.setForeground(new Color(150, 150, 150));
                 }
             }
         });

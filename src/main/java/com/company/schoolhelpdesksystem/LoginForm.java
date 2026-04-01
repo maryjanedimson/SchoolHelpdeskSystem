@@ -23,7 +23,7 @@ public class LoginForm extends JFrame {
     private void initComponents() {
         setTitle("School Helpdesk - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(860, 520);
+        setSize(1000, 600);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -31,18 +31,18 @@ public class LoginForm extends JFrame {
 
         // Left side (form)
         JPanel leftPanel = new JPanel();
-        leftPanel.setPreferredSize(new Dimension(420, 520));
+        leftPanel.setPreferredSize(new Dimension(500, 600));
         leftPanel.setBackground(Color.WHITE);
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setBorder(BorderFactory.createEmptyBorder(40, 50, 40, 50));
 
         JLabel lblLoginTitle = new JLabel("Login");
-        lblLoginTitle.setFont(new Font("Segoe UI", Font.BOLD, 36));
+        lblLoginTitle.setFont(new Font("Segoe UI", Font.BOLD, 32));
         lblLoginTitle.setForeground(new Color(33, 37, 41));
-        lblLoginTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblLoginTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        leftPanel.add(Box.createVerticalStrut(70));
         leftPanel.add(lblLoginTitle);
-        leftPanel.add(Box.createVerticalStrut(40));
+        leftPanel.add(Box.createVerticalStrut(30));
 
         txtUsername = createField("Username");
         txtPassword = createPasswordField("Password");
@@ -89,16 +89,36 @@ public class LoginForm extends JFrame {
         leftPanel.add(lblSignUp);
 
         // Right side (graphics)
-        JPanel rightPanel = new JPanel(new BorderLayout());
+        JPanel rightPanel = new JPanel();
         rightPanel.setBackground(new Color(89, 33, 242));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.setPreferredSize(new Dimension(500, 600));
 
-        // Placeholder for illustration - shows purple panel for now
-        JLabel illustration = new JLabel("📚 School Helpdesk 📚");
-        illustration.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        illustration.setForeground(Color.WHITE);
+        // Add spacing
+        rightPanel.add(Box.createVerticalStrut(80));
+
+        // Placeholder for illustration - shows purple panel with better formatting
+        JLabel illustration = new JLabel("📚");
+        illustration.setFont(new Font("Arial", Font.PLAIN, 80));
         illustration.setHorizontalAlignment(SwingConstants.CENTER);
-        illustration.setVerticalAlignment(SwingConstants.CENTER);
-        rightPanel.add(illustration, BorderLayout.CENTER);
+        illustration.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rightPanel.add(illustration);
+
+        JLabel helpdeskText = new JLabel("School Helpdesk");
+        helpdeskText.setFont(new Font("Segoe UI", Font.BOLD, 42));
+        helpdeskText.setForeground(Color.WHITE);
+        helpdeskText.setHorizontalAlignment(SwingConstants.CENTER);
+        helpdeskText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rightPanel.add(Box.createVerticalStrut(20));
+        rightPanel.add(helpdeskText);
+
+        JLabel tagline = new JLabel("Manage Issues Efficiently");
+        tagline.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        tagline.setForeground(new Color(200, 200, 255));
+        tagline.setHorizontalAlignment(SwingConstants.CENTER);
+        tagline.setAlignmentX(Component.CENTER_ALIGNMENT);
+        rightPanel.add(Box.createVerticalStrut(15));
+        rightPanel.add(tagline);
 
         root.add(leftPanel, BorderLayout.WEST);
         root.add(rightPanel, BorderLayout.EAST);
@@ -107,16 +127,14 @@ public class LoginForm extends JFrame {
     }
 
     private JTextField createField(String placeholder) {
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(Color.WHITE);
-        panel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
-
         JTextField field = new JTextField();
         field.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         field.setBackground(new Color(248, 249, 250));
-        field.setBorder(BorderFactory.createEmptyBorder(10, 12, 10, 12));
+        field.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
         field.setText(placeholder);
         field.setForeground(new Color(140, 140, 140));
+        field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
+        field.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -140,10 +158,12 @@ public class LoginForm extends JFrame {
         JPasswordField field = new JPasswordField();
         field.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         field.setBackground(new Color(248, 249, 250));
-        field.setBorder(BorderFactory.createEmptyBorder(10, 12, 10, 12));
+        field.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
         field.setEchoChar((char)0);
         field.setText(placeholder);
         field.setForeground(new Color(140, 140, 140));
+        field.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
+        field.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

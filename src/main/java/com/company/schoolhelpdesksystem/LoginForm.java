@@ -1,24 +1,6 @@
 package com.company.schoolhelpdesksystem;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-
-/**
- * Login Form for the School Helpdesk System
- */
-public class LoginForm extends JFrame {
-
-    private JTextField txtUsername;
-    private JPasswordField txtPassword;
-    private JButton btnLogin;
-
-    public LoginForm() {
-        initComponents();
-    }
-
-package com.company.schoolhelpdesksystem;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -36,89 +18,164 @@ public class LoginForm extends JFrame {
     }
 
     private void initComponents() {
-        setTitle("School Helpdesk System - Login");
+        setTitle("School Helpdesk - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(450, 350);
+        setSize(860, 520);
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Main panel with background color
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setBackground(new Color(240, 248, 255)); // Alice Blue
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(30, 40, 30, 40));
+        JPanel root = new JPanel(new BorderLayout());
 
-        // Title label
-        JLabel lblTitle = new JLabel("Welcome to Helpdesk", SwingConstants.CENTER);
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
-        lblTitle.setForeground(new Color(25, 25, 112)); // Midnight Blue
-        lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-        mainPanel.add(lblTitle);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        // Left side (form)
+        JPanel leftPanel = new JPanel();
+        leftPanel.setPreferredSize(new Dimension(420, 520));
+        leftPanel.setBackground(Color.WHITE);
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
-        // Username panel
-        JPanel usernamePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        usernamePanel.setBackground(new Color(240, 248, 255));
-        JLabel lblUsername = new JLabel("Username:");
-        lblUsername.setFont(new Font("Arial", Font.PLAIN, 14));
-        lblUsername.setPreferredSize(new Dimension(80, 25));
-        txtUsername = new JTextField(20);
-        txtUsername.setFont(new Font("Arial", Font.PLAIN, 14));
-        usernamePanel.add(lblUsername);
-        usernamePanel.add(txtUsername);
-        mainPanel.add(usernamePanel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        JLabel lblLoginTitle = new JLabel("Login");
+        lblLoginTitle.setFont(new Font("Segoe UI", Font.BOLD, 36));
+        lblLoginTitle.setForeground(new Color(33, 37, 41));
+        lblLoginTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // Password panel
-        JPanel passwordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        passwordPanel.setBackground(new Color(240, 248, 255));
-        JLabel lblPassword = new JLabel("Password:");
-        lblPassword.setFont(new Font("Arial", Font.PLAIN, 14));
-        lblPassword.setPreferredSize(new Dimension(80, 25));
-        txtPassword = new JPasswordField(20);
-        txtPassword.setFont(new Font("Arial", Font.PLAIN, 14));
-        passwordPanel.add(lblPassword);
-        passwordPanel.add(txtPassword);
-        mainPanel.add(passwordPanel);
-        mainPanel.add(Box.createRigidArea(new Dimension(0, 25)));
+        leftPanel.add(Box.createVerticalStrut(70));
+        leftPanel.add(lblLoginTitle);
+        leftPanel.add(Box.createVerticalStrut(40));
 
-        // Button panel
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.setBackground(new Color(240, 248, 255));
+        txtUsername = createField("Username");
+        txtPassword = createPasswordField("Password");
+
+        leftPanel.add(txtUsername);
+        leftPanel.add(Box.createVerticalStrut(20));
+        leftPanel.add(txtPassword);
+        leftPanel.add(Box.createVerticalStrut(15));
+
+        JLabel lblForgot = new JLabel("Forgot Password?");
+        lblForgot.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        lblForgot.setForeground(new Color(102, 102, 102));
+        lblForgot.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        lblForgot.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        leftPanel.add(lblForgot);
+        leftPanel.add(Box.createVerticalStrut(25));
+
         btnLogin = new JButton("Login");
-        btnLogin.setFont(new Font("Arial", Font.BOLD, 14));
-        btnLogin.setBackground(new Color(25, 25, 112)); // Midnight Blue
+        btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnLogin.setForeground(Color.WHITE);
+        btnLogin.setBackground(new Color(89, 33, 242));
         btnLogin.setFocusPainted(false);
-        btnLogin.setPreferredSize(new Dimension(120, 35));
+        btnLogin.setBorder(BorderFactory.createEmptyBorder(12, 40, 12, 40));
+        btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnLogin.addActionListener(this::btnLoginActionPerformed);
 
-        // Add hover effect
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLogin.setBackground(new Color(0, 0, 139)); // Dark Blue
+                btnLogin.setBackground(new Color(73, 19, 242));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnLogin.setBackground(new Color(25, 25, 112)); // Midnight Blue
+                btnLogin.setBackground(new Color(89, 33, 242));
             }
         });
 
-        buttonPanel.add(btnLogin);
-        mainPanel.add(buttonPanel);
+        leftPanel.add(btnLogin);
+        leftPanel.add(Box.createVerticalStrut(25));
 
-        add(mainPanel);
+        JLabel lblSignUp = new JLabel("Don't have an account? Sign Up");
+        lblSignUp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        lblSignUp.setForeground(new Color(102, 102, 102));
+        lblSignUp.setAlignmentX(Component.CENTER_ALIGNMENT);
+        leftPanel.add(lblSignUp);
+
+        // Right side (graphics)
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.setBackground(new Color(89, 33, 242));
+
+        JLabel illustration = new JLabel();
+        illustration.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/assets/school_helpdesk_illustration.png")).getImage().getScaledInstance(380, 420, Image.SCALE_SMOOTH)));
+        illustration.setHorizontalAlignment(SwingConstants.CENTER);
+        rightPanel.add(illustration, BorderLayout.CENTER);
+
+        root.add(leftPanel, BorderLayout.WEST);
+        root.add(rightPanel, BorderLayout.EAST);
+
+        add(root);
+    }
+
+    private JTextField createField(String placeholder) {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
+
+        JTextField field = new JTextField();
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        field.setBackground(new Color(248, 249, 250));
+        field.setBorder(BorderFactory.createEmptyBorder(10, 12, 10, 12));
+        field.setText(placeholder);
+        field.setForeground(new Color(140, 140, 140));
+
+        field.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (field.getText().equals(placeholder)) {
+                    field.setText("");
+                    field.setForeground(new Color(33, 37, 41));
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (field.getText().isEmpty()) {
+                    field.setText(placeholder);
+                    field.setForeground(new Color(140, 140, 140));
+                }
+            }
+        });
+
+        return field;
+    }
+
+    private JPasswordField createPasswordField(String placeholder) {
+        JPasswordField field = new JPasswordField();
+        field.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        field.setBackground(new Color(248, 249, 250));
+        field.setBorder(BorderFactory.createEmptyBorder(10, 12, 10, 12));
+        field.setEchoChar((char)0);
+        field.setText(placeholder);
+        field.setForeground(new Color(140, 140, 140));
+
+        field.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (new String(field.getPassword()).equals(placeholder)) {
+                    field.setText("");
+                    field.setEchoChar('\u2022');
+                    field.setForeground(new Color(33, 37, 41));
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (new String(field.getPassword()).isEmpty()) {
+                    field.setEchoChar((char)0);
+                    field.setText(placeholder);
+                    field.setForeground(new Color(140, 140, 140));
+                }
+            }
+        });
+
+        return field;
     }
 
     private void btnLoginActionPerformed(ActionEvent evt) {
-        // For now, just open UserDashboard
-        // Later add logic for Admin vs User based on credentials
-        new UserDashboard().setVisible(true);
-        this.dispose();
-    }
-        // For now, just open UserDashboard
-        // Later add logic for Admin vs User based on credentials
-        new UserDashboard().setVisible(true);
-        this.dispose();
+        String username = txtUsername.getText();
+        String password = new String(txtPassword.getPassword());
+
+        if (username.isEmpty() || username.equals("Username") || password.isEmpty() || password.equals("Password")) {
+            JOptionPane.showMessageDialog(this, "Please enter both username and password.", "Validation", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Dummy auth flow
+        if (username.equals("admin") && password.equals("admin123")) {
+            new AdminDashboard().setVisible(true);
+            this.dispose();
+        } else {
+            new UserDashboard().setVisible(true);
+            this.dispose();
+        }
     }
 
     public static void main(String[] args) {

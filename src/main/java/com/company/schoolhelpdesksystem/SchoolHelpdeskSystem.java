@@ -14,13 +14,17 @@ import javax.swing.SwingUtilities;
 public class SchoolHelpdeskSystem {
 
     public static void main(String[] args) {
+        System.out.println("SchoolHelpdeskSystem main start");
+
         // Test MongoDB connection before starting the app
         if (!DatabaseConnection.testConnection()) {
+            System.err.println("Warning: MongoDB connection failed - starting UI anyway for local testing.");
             JOptionPane.showMessageDialog(null,
-                "Failed to connect to MongoDB. Please check your connection string in DatabaseConnection.java",
-                "Connection Error",
-                JOptionPane.ERROR_MESSAGE);
-            System.exit(1);
+                "Failed to connect to MongoDB. UI continues in demo mode.",
+                "Connection Warning",
+                JOptionPane.WARNING_MESSAGE);
+        } else {
+            System.out.println("MongoDB connection OK");
         }
 
         SwingUtilities.invokeLater(() -> new LoginForm().setVisible(true));

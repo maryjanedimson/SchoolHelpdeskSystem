@@ -15,7 +15,7 @@ public class UserDashboard extends JFrame {
 
     public UserDashboard() {
         initComponents();
-        loadSampleData(); // Load some sample tickets
+        loadTickets();
     }
 
     private void initComponents() {
@@ -49,12 +49,21 @@ public class UserDashboard extends JFrame {
     private void btnSubmitIssueActionPerformed(ActionEvent evt) {
         new SubmitIssueForm().setVisible(true);
         // Don't dispose, user might want to go back
+        // TODO: Refresh table after submitting
     }
 
-    private void loadSampleData() {
-        // Sample data
-        tableModel.addRow(new Object[]{"1", "IT", "Computer not working", "Open"});
-        tableModel.addRow(new Object[]{"2", "Maintenance", "Broken chair", "Resolved"});
+    private void loadTickets() {
+        tableModel.setRowCount(0); // Clear existing rows
+        TicketService ticketService = new TicketService();
+        List<Ticket> tickets = ticketService.getTicketsByUser("user1"); // TODO: Get actual userId
+        for (Ticket ticket : tickets) {
+            tableModel.addRow(new Object[]{
+                ticket.getId().toString(),
+                ticket.getDepartment(),
+                ticket.getIssue(),
+                ticket.getStatus()
+            });
+        }
     }
 
     public static void main(String[] args) {

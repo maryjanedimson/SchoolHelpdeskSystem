@@ -10,4 +10,13 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>com.company.schoolhelpdesksystem.SchoolHelpdeskSystem</exec.mainClass>
     </properties>
+
+    <dependencies>
+        <!-- MongoDB Java Driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>5.1.4</version>
+        </dependency>
+    </dependencies>
 </project>

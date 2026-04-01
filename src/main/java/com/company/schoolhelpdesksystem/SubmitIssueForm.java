@@ -58,9 +58,13 @@ public class SubmitIssueForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Please describe your issue.");
             return;
         }
-        // For now, just show a message
+
+        // Save to database
+        Ticket ticket = new Ticket("user1", department, issue, "Open"); // TODO: Get actual userId
+        TicketService ticketService = new TicketService();
+        ticketService.saveTicket(ticket);
+
         JOptionPane.showMessageDialog(this, "Ticket submitted to " + department + " department.");
-        // Later, add to database or update table
         this.dispose();
     }
 

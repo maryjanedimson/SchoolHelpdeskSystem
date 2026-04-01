@@ -15,7 +15,7 @@ public class AdminDashboard extends JFrame {
 
     public AdminDashboard() {
         initComponents();
-        loadSampleData();
+        loadAllTickets();
     }
 
     private void initComponents() {
@@ -52,15 +52,33 @@ public class AdminDashboard extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select a ticket to resolve.");
             return;
         }
+
+        // Get ticket ID from table
+        String ticketIdStr = (String) tableModel.getValueAt(selectedRow, 0);
+        ObjectId ticketId = new ObjectId(ticketIdStr);
+
+        // Update in database
+        TicketService ticketService = new TicketService();
+        ticketService.updateTicketStatus(ticketId, "Resolved");
+
+        // Update table
         tableModel.setValueAt("Resolved", selectedRow, 4);
         JOptionPane.showMessageDialog(this, "Ticket marked as resolved.");
     }
 
-    private void loadSampleData() {
-        // Sample data
-        tableModel.addRow(new Object[]{"1", "user1", "IT", "Computer not working", "Open"});
-        tableModel.addRow(new Object[]{"2", "user2", "Maintenance", "Broken chair", "Open"});
-        tableModel.addRow(new Object[]{"3", "user3", "Registrar", "Grade issue", "Resolved"});
+    private void loadAllTickets() {
+        tableModel.setRowCount(0); // Clear existing rows
+        TicketService ticketService = new TicketService();
+        List<Ticket> tickets = ticketService.getAllTickets();
+        for (Ticket ticket : tickets) {
+            tableModel.addRow(new Object[]{
+                ticket.getId().toString(),
+                ticket.getUserId(),
+                ticket.getDepartment(),
+                ticket.getIssue(),
+                ticket.getStatus()
+            });
+        }
     }
 
     public static void main(String[] args) {

@@ -15,6 +15,9 @@ public class LoginForm extends JFrame {
 
     public LoginForm() {
         initComponents();
+        // Bring the login window to front for visibility
+        setAlwaysOnTop(true);
+        setAlwaysOnTop(false);
     }
 
     private void initComponents() {
@@ -89,9 +92,12 @@ public class LoginForm extends JFrame {
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBackground(new Color(89, 33, 242));
 
-        JLabel illustration = new JLabel();
-        illustration.setIcon(new ImageIcon(new ImageIcon(getClass().getResource("/assets/school_helpdesk_illustration.png")).getImage().getScaledInstance(380, 420, Image.SCALE_SMOOTH)));
+        // Placeholder for illustration - shows purple panel for now
+        JLabel illustration = new JLabel("📚 School Helpdesk 📚");
+        illustration.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        illustration.setForeground(Color.WHITE);
         illustration.setHorizontalAlignment(SwingConstants.CENTER);
+        illustration.setVerticalAlignment(SwingConstants.CENTER);
         rightPanel.add(illustration, BorderLayout.CENTER);
 
         root.add(leftPanel, BorderLayout.WEST);
@@ -179,6 +185,7 @@ public class LoginForm extends JFrame {
     }
 
     public static void main(String[] args) {
+        System.out.println("LoginForm main: start");
         SwingUtilities.invokeLater(() -> new LoginForm().setVisible(true));
     }
 }

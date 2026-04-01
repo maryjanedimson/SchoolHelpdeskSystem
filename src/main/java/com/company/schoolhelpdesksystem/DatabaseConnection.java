@@ -12,7 +12,7 @@ public class DatabaseConnection {
     // Update this with your MongoDB connection string
     // For local MongoDB: "mongodb://localhost:27017"
     // For MongoDB Atlas: "mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority"
-    private static final String CONNECTION_STRING = "mongodb://localhost:27017";
+    private static final String CONNECTION_STRING = "mongodb://localhost:27017"; // CHANGE THIS TO YOUR CONNECTION STRING
 
     private static final String DATABASE_NAME = "schoolhelpdesk";
 
@@ -32,6 +32,18 @@ public class DatabaseConnection {
             mongoClient.close();
             mongoClient = null;
             database = null;
+        }
+    }
+
+    // Test connection method
+    public static boolean testConnection() {
+        try {
+            MongoDatabase db = getDatabase();
+            db.listCollectionNames().first(); // Simple operation to test connection
+            return true;
+        } catch (Exception e) {
+            System.err.println("MongoDB connection failed: " + e.getMessage());
+            return false;
         }
     }
 }
